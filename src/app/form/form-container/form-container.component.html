@@ -1,0 +1,86 @@
+<ng-container *ngIf="formPayload$ | async as formPayload">
+  <form
+    [formGroup]="formPayload.form"
+    (ngSubmit)="formSubmit.next(formPayload.form)"
+  >
+    <ng-container *ngFor="let item of formPayload.data">
+      <ng-container [ngSwitch]="item.type">
+        <!-- TEXT -->
+        <ng-container *ngSwitchCase="'text'">
+          <kendo-formfield>
+            <kendo-label [for]="item.control" [text]="item.placeholder">
+              <input [formControlName]="item.control" kendoTextBox />
+              <ng-container *ngFor="let validation of item.validations">
+                <kendo-formerror
+                  *ngIf="
+                    formPayload.form.get(item.control).touched &&
+                    formPayload.form.get(item.control).hasError(validation.name)
+                  "
+                >
+                  {{ validation.message }}
+                </kendo-formerror>
+              </ng-container>
+            </kendo-label>
+          </kendo-formfield>
+        </ng-container>
+        <!-- NUMBER -->
+        <ng-container *ngSwitchCase="'number'">
+          <kendo-formfield>
+            <kendo-label [for]="item.control" [text]="item.placeholder">
+              <kendo-numerictextbox
+                [formControlName]="item.control"
+              ></kendo-numerictextbox>
+              <ng-container *ngFor="let validation of item.validations">
+                <kendo-formerror
+                  *ngIf="
+                    formPayload.form.get(item.control).touched &&
+                    formPayload.form.get(item.control).hasError(validation.name)
+                  "
+                >
+                  {{ validation.message }}
+                </kendo-formerror>
+              </ng-container>
+            </kendo-label>
+          </kendo-formfield>
+        </ng-container>
+        <!-- CHECKBOX -->
+        <ng-container *ngSwitchCase="'checkbox'">
+          <kendo-formfield>
+            <kendo-label
+              class="checkbox"
+              [for]="item.control"
+              [text]="item.placeholder"
+            >
+              <input
+                [formControlName]="item.control"
+                type="checkbox"
+                kendoCheckBox
+            /></kendo-label>
+          </kendo-formfield>
+        </ng-container>
+        <!-- SELECT -->
+        <ng-container *ngSwitchCase="'select'">
+          <kendo-formfield>
+            <kendo-label [text]="item.placeholder">
+              <kendo-dropdownlist
+                [formControlName]="item.control"
+                [data]="item.options"
+              ></kendo-dropdownlist>
+            </kendo-label>
+          </kendo-formfield>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <div class="action-bar">
+      <button
+        kendoButton
+        themeColor="primary"
+        type="submit"
+        fillMode="outline"
+        [disabled]="!formPayload.form.valid"
+      >
+        Enviar
+      </button>
+    </div>
+  </form>
+</ng-container>

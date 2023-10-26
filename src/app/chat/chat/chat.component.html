@@ -1,0 +1,5 @@
+<kendo-chat [messages]="feed" [user]="user" (sendMessage)="sendMessage($event)">
+  <ng-template kendoChatMessageTemplate let-message>
+    {{ message.text }}
+  </ng-template>
+</kendo-chat>

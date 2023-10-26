@@ -1,0 +1,66 @@
+[
+  {
+    "control": "name",
+    "type": "text",
+    "placeholder": "Nombre",
+    "validations": [
+      {
+        "name": "required",
+        "message": "required"
+      }
+    ]
+  },
+  {
+    "control": "email",
+    "type": "text",
+    "placeholder": "Correro electronico",
+    "validations": [
+      {
+        "name": "required",
+        "message": "required"
+      },
+      {
+        "name": "email",
+        "message": "invalid correro"
+      },
+      {
+        "name": "minlength",
+        "message": "min 6 symbols",
+        "value": 6
+      }
+    ]
+  },
+  {
+    "control": "debt",
+    "type": "number",
+    "placeholder": "Dudasos",
+    "validations": [
+      {
+        "name": "required",
+        "message": "required"
+      },
+      {
+        "name": "min",
+        "message": "min 3 digits",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "control": "drink",
+    "type": "checkbox",
+    "placeholder": "Comiste hoy?"
+  },
+  {
+    "control": "mood",
+    "type": "select",
+    "placeholder": "Como te sientes?",
+    "validations": [
+      {
+        "name": "required",
+        "message": "required"
+      }
+    ],
+    "options": ["mal", "relajado", "bueno"]
+  }
+]
